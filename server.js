@@ -48,7 +48,8 @@ var sortNegativeTweets = function(a,b){
 
 // Escucha en el puerto 8080 y corre el server
 twitter.init().then((data) => {
-    app.listen(process.env.PORT || 8080, function() {  
-        console.log('App listening on port '+process.env.PORT || 8080);
+    var port = process.env.PORT||8080;
+    app.listen(port, function() {  
+        console.log('App listening on port '+ port);
     });
 })
