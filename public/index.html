@@ -12,13 +12,16 @@
     <link href="./lib/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./bower_components/ngprogress/ngProgress.css">
 
+    <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
-    <script src="taApp.js"></script>
-    <script src="taController.js"></script>
 
     <!-- Dependencies -->
     <script src="./bower_components/ngprogress/build/ngprogress.min.js"></script>
     <script src="./bower_components/ngtweet/dist/ngtweet.min.js"></script>
+
+    <!-- Business logic -->
+    <script src="taApp.js"></script>
+    <script src="taController.js"></script>
 
   </head>
 
@@ -59,7 +62,7 @@
           <div class="col-md-6 col-md-offset-2 text-center">
           <div ng-repeat="find in vm.tweets.positives">
             
-            <twitter-widget twitter-widget-id=find.tweet.id_str twitter-widget-options="{'cards': 'hidden'}">
+            <twitter-widget twitter-widget-id=find.tweetId twitter-widget-options="{'cards': 'hidden'}">
             </twitter-widget>
 
           </div>
@@ -68,7 +71,7 @@
           <div class="col-md-6 text-center">
           <div ng-repeat="find in vm.tweets.negatives">
 
-            <twitter-widget twitter-widget-id=find.tweet.id_str twitter-widget-options="{'cards': 'hidden'}">
+            <twitter-widget twitter-widget-id=find.tweetId twitter-widget-options="{'cards': 'hidden'}">
             </twitter-widget>
 
           </div>

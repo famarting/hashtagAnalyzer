@@ -6,10 +6,10 @@ var client;
 var init = function(){
     return new Promise((resolve, reject) => {
         client = new Twitter({
-            consumer_key: 'HfGGGDuSHvRhwatvumSchhpQt',
-            consumer_secret: 'Tf5r9FEYnCQL5PLZVoVqBVqPwrorf9Bwjw0lgyHjHz0Ur9IOR2',
-            access_token_key: '535441417-bLHipwflJlYPUI4lZHCfzLy4vxauQnzB0qnItPHt',
-            access_token_secret: 'rY1DslSmwt4I06zgkjnCxadpgB2CSQ1Ms3u97O44PjFdd'
+            consumer_key: process.env.CONSUMER_KEY,
+            consumer_secret: process.env.CONSUMER_SECRET,
+            access_token_key: process.env.ACCESS_TOKEN_KEY,
+            access_token_secret: process.env.ACCESS_TOKEN_SECRET
         });
         console.log("new tiwtter client");
         resolve();
@@ -20,14 +20,15 @@ var init = function(){
 var searchHastag = function(hashtag){
 
     return new Promise((resolve,reject) => {
-        var positives = [];
-        var negatives = [];
+        var tweetsResponse = {}
+        tweetsResponse.positives = [];
+        tweetsResponse.negatives = [];
 
         if(!hashtag.includes("#")){
             hashtag = "#"+hashtag;
         }
 
-        client.get('search/tweets', {q: hashtag, count: 50, result_type: "polular", lang: "en"}, function(error, data, response) {
+        client.get('search/tweets', {q: hashtag, count: 100, result_type: "polular", lang: "en"}, function(error, data, response) {
             var tweets = data.statuses;
             if(!tweets || error){
                 reject(error)
@@ -36,16 +37,13 @@ var searchHastag = function(hashtag){
                 var tweet = tweets[i];
                 var score = analyzer.classify(tweet.text);
                 if(score>=0){
-                    positives.push({score: score, tweet: tweet})
+                    tweetsResponse.positives.push({score: score, tweetId: tweet.id_str})
                 }else {
-                    negatives.push({score: score, tweet: tweet})
+                    tweetsResponse.negatives.push({score: score, tweetId: tweet.id_str})
                 }
             }
 
-            var tweetsResponse = {}
             tweetsResponse.total = tweets.length;
-            tweetsResponse.positives = positives;
-            tweetsResponse.negatives = negatives;
 
             resolve(tweetsResponse)
 
@@ -55,21 +53,25 @@ var searchHastag = function(hashtag){
 
 var streamHashtag = function(hashtag, callback){
 
-    if(!hashtag.includes("#")){
-        hashtag = "#"+hashtag;
-    }
+    return new Promise((resolve,reject)=>{
+        if(!hashtag.includes("#")){
+            hashtag = "#"+hashtag;
+        }
 
-    client.stream('statuses/filter', {track: hashtag},  function(stream) {
-        stream.on('data', function(tweet) {
-            console.log(tweet.text);
-            callback(tweet);
-        });
+        client.stream('statuses/filter',{track: hashtag, language: "en"},  function(stream) {
+            stream.on('data', function(tweet) {
+                console.log(tweet.text);
+                callback(tweet);
+            });
 
-        stream.on('error', function(error) {
-            console.log(error);
+            stream.on('error', function(error) {
+                console.log(error);
+            });
+            resolve(stream);
         });
     });
 
+    
 }
 
 module.exports = {
