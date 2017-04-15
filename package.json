@@ -1,0 +1,31 @@
+{
+  "name": "hashtaganalyzer",
+  "version": "1.0.0",
+  "description": "Sentimental analysis of tweets",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "nodemon": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "4.15.2",
+    "body-parser": "1.17.1",
+    "sentiment": "4.0.0",
+    "twitter": "1.7.0",
+    "ml-sentiment": "2.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "1.11.0"
+  },
+  "author": "Fabián Martínez",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/famargon/hashtagAnalyzer.git"
+  },
+  "bugs": {
+    "url": "https://github.com/famargon/hashtagAnalyzer/issues"
+  },
+  "homepage": "https://github.com/famargon/hashtagAnalyzer#readme"
+}

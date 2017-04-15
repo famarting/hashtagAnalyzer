@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Twitter analyzer</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./lib/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./bower_components/ngprogress/ngProgress.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="taApp.js"></script>
+    <script src="taController.js"></script>
+
+    <!-- Dependencies -->
+    <script src="./bower_components/ngprogress/build/ngprogress.min.js"></script>
+    <script src="./bower_components/ngtweet/dist/ngtweet.min.js"></script>
+
+  </head>
+
+  <body ng-cloak ng-app="taApp" ng-controller="taCtrl as vm" >
+
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">Hashtag analyzer</h1>
+        <p class="lead text-muted">Choose a hashtag to see its opinions.</p>
+
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">#</span>
+          <input type="text" class="form-control" placeholder="hashtag" ng-model="vm.hashtag.text" ng-keyup="$event.keyCode == 13 && vm.search()">
+          <span class="input-group-btn">
+            <button class="btn btn-primary" ng-click="vm.search()">Search</button>
+          </span>
+        </div>  
+      </div>
+    </section>
+
+    <div class="container" data-ng-cloak>
+
+      <div class="row">
+
+          <div class="col-md-6 col-md-offset-2 text-center" ng-if="vm.searched">
+          <h3>Positives</h3>
+          </br>
+          </div>
+
+          <div class="col-md-6 text-center" ng-if="vm.searched">
+          <h3>Negatives</h3>
+          </br>
+          </div>
+
+      </div>
+      <div class="row" ng-cloak>
+
+          <div class="col-md-6 col-md-offset-2 text-center">
+          <div ng-repeat="find in vm.tweets.positives">
+            
+            <twitter-widget twitter-widget-id=find.tweet.id_str twitter-widget-options="{'cards': 'hidden'}">
+            </twitter-widget>
+
+          </div>
+          </div>
+
+          <div class="col-md-6 text-center">
+          <div ng-repeat="find in vm.tweets.negatives">
+
+            <twitter-widget twitter-widget-id=find.tweet.id_str twitter-widget-options="{'cards': 'hidden'}">
+            </twitter-widget>
+
+          </div>
+          </div>
+
+      </div>
+    </div>
+
+    <footer class="text-muted">
+      <div class="container">
+        <p class="float-right" ng-if="vm.searched">
+          <a href="#">Back to top</a>
+        </p> 
+        <p>
+          <a>Made by Fabián Martínez </a>
+        </p>
+        <p>
+          <a>Email: famargon13@gmail.com </a>
+        </p>
+        <p>
+          <a>GitHub: </a>
+          <a href="https://github.com/famargon"> famargon </a>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="./lib/holder.min.js"></script>
+    <script>
+      $(function () {
+        Holder.addTheme("thumb", { background: "#55595c", foreground: "#eceeef", text: "Thumbnail" });
+      });
+    </script>
+    <script src="./lib/bootstrap.min.js"></script>
+
+  </body>
+</html>
