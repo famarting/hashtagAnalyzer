@@ -14,11 +14,11 @@
     "sentiment": "4.0.0",
     "twitter": "1.7.0",
     "ml-sentiment": "2.0.7",
-    "socket.io": "1.7.3"
+    "socket.io": "1.7.3",
+    "dotenv": "4.0.0"
   },
   "devDependencies": {
-    "nodemon": "1.11.0",
-    "dotenv": "4.0.0"
+    "nodemon": "1.11.0"
   },
   "author": "Fabián Martínez",
   "license": "Apache-2.0",
