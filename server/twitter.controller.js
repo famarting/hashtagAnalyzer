@@ -60,7 +60,6 @@ var streamHashtag = function(hashtag, callback){
 
         client.stream('statuses/filter',{track: hashtag, language: "en"},  function(stream) {
             stream.on('data', function(tweet) {
-                console.log(tweet.text);
                 callback(tweet);
             });
 
