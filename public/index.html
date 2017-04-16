@@ -46,20 +46,10 @@
 
       <div class="row">
 
-          <div class="col-md-6 col-md-offset-2 text-center" ng-if="vm.searched">
+          </br>
+          <div class="col-md-6 col-md-offset-2 text-center flex-first" ng-if="vm.searched">
           <h3>Positives</h3>
           </br>
-          </div>
-
-          <div class="col-md-6 text-center" ng-if="vm.searched">
-          <h3>Negatives</h3>
-          </br>
-          </div>
-
-      </div>
-      <div class="row" ng-cloak>
-
-          <div class="col-md-6 col-md-offset-2 text-center">
           <div ng-repeat="find in vm.tweets.positives">
             
             <twitter-widget twitter-widget-id=find.tweetId twitter-widget-options="{'cards': 'hidden'}">
@@ -67,8 +57,11 @@
 
           </div>
           </div>
-
-          <div class="col-md-6 text-center">
+          </br>
+          <div class="col-md-6 text-center flex-last" ng-if="vm.searched">
+          
+          <h3>Negatives</h3>
+          </br>
           <div ng-repeat="find in vm.tweets.negatives">
 
             <twitter-widget twitter-widget-id=find.tweetId twitter-widget-options="{'cards': 'hidden'}">
@@ -78,6 +71,7 @@
           </div>
 
       </div>
+
     </div>
 
     <footer class="text-muted">
