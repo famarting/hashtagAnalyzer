@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Fabián Martínez">
 
-    <title>Twitter analyzer</title>
+    <title>Hashtag analyzer</title>
 
     <!-- Bootstrap core CSS -->
     <link href="./lib/bootstrap.min.css" rel="stylesheet">
@@ -26,12 +26,11 @@
   </head>
 
   <body ng-cloak ng-app="taApp" ng-controller="taCtrl as vm" >
-
+    
     <section class="jumbotron text-center">
       <div class="container">
         <h1 class="jumbotron-heading">Hashtag analyzer</h1>
-        <p class="lead text-muted">Choose a hashtag to see its opinions.</p>
-
+        <p class="lead text-muted">Choose a hashtag. Check the opinions.</p>
         <div class="input-group">
           <span class="input-group-addon" id="basic-addon1">#</span>
           <input type="text" class="form-control" placeholder="hashtag" ng-model="vm.hashtag.text" ng-keyup="$event.keyCode == 13 && vm.search()">
@@ -48,7 +47,7 @@
 
           </br>
           <div class="col-md-6 col-md-offset-2 text-center flex-first" ng-if="vm.searched">
-          <h3>Positives</h3>
+          <h3 class="text-muted">Positives</h3>
           </br>
           <div ng-repeat="find in vm.tweets.positives">
             
@@ -60,7 +59,7 @@
           </br>
           <div class="col-md-6 text-center flex-last" ng-if="vm.searched">
           
-          <h3>Negatives</h3>
+          <h3 class="text-muted">Negatives</h3>
           </br>
           <div ng-repeat="find in vm.tweets.negatives">
 

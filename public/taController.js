@@ -1,16 +1,14 @@
 (function(taApp){
 	controller.$inject =["$http","ngProgressFactory"];
 	function controller(http,ngProgressFactory){
-		
 		var vm = this;
 
 		var socket = io.connect();
-
-
 		vm.progressbar = ngProgressFactory.createInstance();
 		
 		vm.hashtag = {}
 		vm.searched = false
+		
 		vm.search = function(){
 			if(!vm.hashtag.text){
 				return;

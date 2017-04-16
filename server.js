@@ -27,7 +27,7 @@ app.post("/api/search",function(req,res){
         tweets = utils.getSortedTweets(tweets);
         res.json(tweets);
     });
-})
+});
 
 server.listen(port, function() {  
     console.log('App listening on port '+ port);
